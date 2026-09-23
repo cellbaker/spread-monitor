@@ -1,0 +1,147 @@
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 520px;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 12px;
+  background: #0f1115;
+  color: #e6e6e6;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background: #161922;
+  padding: 8px 10px;
+  border-bottom: 1px solid #262a36;
+}
+
+.row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.row:last-child { margin-bottom: 0; }
+
+input[type="text"], input[type="number"], select {
+  background: #0f1115;
+  color: #e6e6e6;
+  border: 1px solid #2a2f3d;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+input[type="text"] { flex: 1; }
+input[type="number"] { width: 70px; }
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #9aa3b2;
+}
+label.auto-open {
+  cursor: pointer;
+  user-select: none;
+  font-size: 11px;
+}
+label.auto-open input { cursor: pointer; }
+
+button {
+  background: #2a2f3d;
+  color: #e6e6e6;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+button:hover { background: #3a4051; }
+
+.status {
+  color: #9aa3b2;
+  font-size: 11px;
+  margin-top: 4px;
+}
+.status .err { color: #ff7676; margin-left: 6px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+thead th {
+  position: sticky;
+  top: 0;
+  background: #1a1e28;
+  text-align: left;
+  padding: 6px 8px;
+  font-weight: 500;
+  color: #9aa3b2;
+  border-bottom: 1px solid #262a36;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+tbody td {
+  padding: 5px 8px;
+  border-bottom: 1px solid #1a1e28;
+}
+tbody tr:hover { background: #161922; }
+
+.num { text-align: right; }
+.pos { color: #4ade80; }
+.neg { color: #f87171; }
+.zero { color: #9aa3b2; }
+
+.exchange-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+}
+.tag-mexc    { background: #1f3a5a; color: #7ec3ff; }
+.tag-bybit   { background: #5a3f1f; color: #ffc77a; }
+.tag-binance { background: #5a4a1f; color: #f3d273; }
+.tag-gate    { background: #1f5a4a; color: #7adcc0; }
+.tag-ourbit  { background: #3a2f5a; color: #c8b3ff; }
+.tag-aster   { background: #5a1f4a; color: #ff9ad9; }
+.tag-kucoin  { background: #1f5a30; color: #7df0a0; }
+.tag-bitget  { background: #1f4a5a; color: #7adef0; }
+.tag-bingx   { background: #3a5a1f; color: #b4f57a; }
+
+/* ── вкладки и лог аномалий ── */
+.tabs { gap: 4px; }
+.tab {
+  background: #1a1e28;
+  color: #9aa3b2;
+  font-size: 12px;
+  padding: 4px 12px;
+}
+.tab.active { background: #2a3550; color: #e6e6e6; }
+.tab .cnt {
+  background: #0f1115;
+  border-radius: 8px;
+  padding: 0 5px;
+  font-size: 10px;
+  margin-left: 4px;
+}
+.hidden { display: none; }
+
+.logs { padding: 4px 6px; max-height: 480px; overflow: auto; }
+.logs .empty { color: #9aa3b2; text-align: center; padding: 24px 10px; }
+.log { border-bottom: 1px solid #1a1e28; padding: 5px 4px; }
+.log .l1 { display: flex; align-items: center; gap: 6px; }
+.log .l2 { color: #9aa3b2; font-size: 11px; margin-top: 2px; margin-left: 13px; font-variant-numeric: tabular-nums; }
+.log .t { color: #9aa3b2; font-variant-numeric: tabular-nums; }
+.log .sym { font-weight: 600; }
+.log .rsn { margin-left: auto; font-size: 10px; padding: 1px 6px; border-radius: 3px; }
+.log.op .rsn { background: #14331f; color: #4ade80; }
+.log.sup .rsn { background: #3a2f12; color: #f3c673; }
+.dot2 { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
+.log.op .dot2 { background: #4ade80; }
+.log.sup .dot2 { background: #f3c673; }
+.log .ty { color: #c8b3ff; }

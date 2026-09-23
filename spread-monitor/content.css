@@ -1,0 +1,233 @@
+﻿/* ============ primary-бейдж: спред текущей биржи, рядом с fair ============ */
+
+.sm-primary {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  background: rgba(154, 163, 178, 0.15);
+  color: #d6d9e0;
+  vertical-align: middle;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.sm-primary.sm-pos { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+.sm-primary.sm-neg { background: rgba(248, 113, 113, 0.2); color: #f87171; }
+
+/* ============ инлайн-полоса (вставляется в DOM биржи) ============ */
+
+.sm-strip {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-left: 10px;
+  vertical-align: middle;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  max-width: 100%;
+}
+
+.sm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(154, 163, 178, 0.12);
+  color: #d6d9e0;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.3;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.sm-chip:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(154, 163, 178, 0.22);
+}
+/* Иконка биржи: кружок с монограммой в фирменном цвете (цвета задаются из content.js) */
+.sm-chip-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  background: #4b5563;
+  color: #fff;
+}
+.sm-chip-name {
+  font-size: 10px;
+  letter-spacing: 0.01em;
+  color: #c3c9d4;
+  font-weight: 700;
+}
+.sm-chip-pct { font-weight: 700; }
+.sm-chip-lev {
+  font-size: 9px;
+  font-weight: 700;
+  color: #d9a93a;            /* золотистый — макс. плечо на бирже */
+  white-space: nowrap;
+}
+
+.sm-chip.sm-pos .sm-chip-pct { color: #4ade80; }
+.sm-chip.sm-neg .sm-chip-pct { color: #f87171; }
+.sm-chip.sm-missing {
+  opacity: 0.45;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ============ плавающий fallback в углу ============ */
+
+#spread-monitor-widget {
+  position: fixed;
+  top: 80px;
+  right: 16px;
+  z-index: 2147483647;
+  width: 258px;   /* шире: вместо кодов MX/BY теперь полные названия + иконка */
+  background: rgba(15, 17, 21, 0.94);
+  color: #e6e6e6;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 12px;
+  border: 1px solid #2a2f3d;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+#spread-monitor-widget.sm-hidden .sm-body,
+#spread-monitor-widget.sm-hidden .sm-foot { display: none; }
+
+#spread-monitor-widget .sm-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-bottom: 1px solid #262a36;
+  background: #161922;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+#spread-monitor-widget .sm-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9aa3b2;
+}
+#spread-monitor-widget .sm-symbol { flex: 1; min-width: 0; font-weight: 600; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#spread-monitor-widget .sm-toggle { display: flex; gap: 2px; margin-right: 2px; }
+#spread-monitor-widget .sm-tg {
+  font: 700 9px/1 -apple-system, "Segoe UI", Roboto, sans-serif;
+  text-transform: uppercase;
+  padding: 3px 6px;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  background: rgba(154, 163, 178, 0.14);
+  color: #9aa3b2;
+}
+#spread-monitor-widget .sm-tg.sm-tg-on { background: #2563eb; color: #fff; }
+#spread-monitor-widget .sm-tg:hover { color: #fff; }
+#spread-monitor-widget .sm-drag,
+#spread-monitor-widget .sm-close { color: #9aa3b2; cursor: pointer; padding: 0 2px; font-size: 14px; line-height: 1; }
+#spread-monitor-widget .sm-drag { cursor: move; }
+#spread-monitor-widget .sm-close:hover,
+#spread-monitor-widget .sm-drag:hover { color: #fff; }
+
+#spread-monitor-widget .sm-body {
+  padding: 5px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+#spread-monitor-widget .sm-row-chip {
+  width: 100%;
+  background: rgba(154, 163, 178, 0.08);
+}
+#spread-monitor-widget .sm-row-chip .sm-chip-name { margin-right: auto; }
+#spread-monitor-widget .sm-row-chip .sm-chip-lev { min-width: 30px; text-align: right; }
+#spread-monitor-widget .sm-row-chip .sm-chip-pct { min-width: 58px; text-align: right; }
+
+/* Шапка колонок: чтобы было видно, какой процент по fair, а какой по last */
+#spread-monitor-widget .sm-cols {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px 3px;
+  font-size: 9px;
+  letter-spacing: 0.03em;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+#spread-monitor-widget .sm-cols-ex { margin-right: auto; padding-left: 18px; } /* 14px иконка + gap */
+#spread-monitor-widget .sm-cols-lev { min-width: 30px; text-align: right; }
+#spread-monitor-widget .sm-cols-c { min-width: 58px; text-align: right; }
+
+/* Спред по fair — приглушённее, чтобы last читался как основной */
+#spread-monitor-widget .sm-chip-pct-fair { opacity: 0.75; }
+.sm-chip-pct.sm-dim { color: #4b5563; }
+
+/* Строка биржи, на которой открыт виджет = точка отсчёта */
+#spread-monitor-widget .sm-chip-cur {
+  background: rgba(96, 165, 250, 0.12);
+  box-shadow: inset 2px 0 0 #60a5fa;
+}
+#spread-monitor-widget .sm-row-chip:hover { background: rgba(154, 163, 178, 0.18); }
+
+#spread-monitor-widget .sm-foot {
+  padding: 4px 8px;
+  border-top: 1px solid #262a36;
+  font-size: 10px;
+  color: #6b7280;
+}
+
+/* Биржа не ответила — отличаем от «пары нет на бирже» */
+#spread-monitor-widget .sm-exfail .sm-chip-name { color: #d9a93a; }
+
+
+/* Логотип биржи фоном — без мигания при перерисовке виджета */
+.sm-chip-ico-img {
+  background-color: transparent !important;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Подпись автора в подвале виджета */
+#spread-monitor-widget .sm-credit {
+  padding: 3px 8px 5px;
+  font-size: 9px;
+  letter-spacing: 0.03em;
+  color: #5c6472;
+  text-align: center;
+  border-top: 1px solid #1e2230;
+}
+#spread-monitor-widget .sm-credit b { color: #8b93a3; font-weight: 700; }
+#spread-monitor-widget .sm-credit { border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; }
+
+/* Fair-цена текущей биржи прямо в шапке виджета — свой узел, ничего чужого его не унесёт */
+#spread-monitor-widget .sm-cur-fair {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(154, 163, 178, 0.14);
+  color: #c3c9d4;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+#spread-monitor-widget .sm-cur-fair:empty { display: none; padding: 0; }
+#spread-monitor-widget .sm-cur-fair.sm-pos { background: rgba(74, 222, 128, 0.18); color: #4ade80; }
+#spread-monitor-widget .sm-cur-fair.sm-neg { background: rgba(248, 113, 113, 0.18); color: #f87171; }

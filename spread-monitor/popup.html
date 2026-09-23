@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spread Monitor</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <div class="row">
+        <input id="search" type="text" placeholder="поиск тикера" autocomplete="off" />
+        <select id="ex-filter">
+          <option value="all">все биржи</option>
+          <option value="mexc">MEXC</option>
+          <option value="binance">Binance</option>
+          <option value="bitget">Bitget</option>
+          <option value="kucoin">KuCoin</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>min |spread| %
+          <input id="min-spread" type="number" step="0.05" value="0" />
+        </label>
+        <label>сортировать
+          <select id="sort">
+            <option value="abs">|спред|</option>
+            <option value="signed">спред</option>
+            <option value="symbol">тикер</option>
+          </select>
+        </label>
+        <button id="refresh" title="обновить">↻</button>
+      </div>
+      <div class="row">
+        <label class="auto-open" title="Авто-открытие вкладки при: (|спред fair↔last| ≥ 10% И плечо ≥ 50x, в любую сторону) ИЛИ крупном быстром движении ВВЕРХ (≥10%/2м, ≥7%/1м) — шорт-сетап. Aster и Gate исключены. Приоритет MEXC, кулдаун 5 мин на пару. Все срабатывания (включая пропущенные по кулдауну) пишутся во вкладку «Логи».">
+          <input id="auto-open" type="checkbox" />
+          авто-открытие: спред ≥10%·50x · движение↑ ≥10%/2м · кд 5 мин
+        </label>
+      </div>
+      <div class="row tabs">
+        <button id="tab-spreads" class="tab active">Спреды</button>
+        <button id="tab-logs" class="tab">Логи <span id="log-count" class="cnt">0</span></button>
+      </div>
+      <div id="status" class="status"></div>
+    </header>
+
+    <table id="spread-table">
+      <thead>
+        <tr>
+          <th>Биржа</th>
+          <th>Тикер</th>
+          <th class="num">Last</th>
+          <th class="num">Fair</th>
+          <th class="num">Спред %</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+
+    <div id="logs" class="logs hidden"></div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
